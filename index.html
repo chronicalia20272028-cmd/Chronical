@@ -55,7 +55,7 @@
             padding: clamp(12px, 1.5vh, 22px) clamp(16px, 2vw, 28px);
             font-size: var(--font-header);
             font-weight: 600;
-            border-bottom: 1px solid #1a1a1a;
+            border: none;
             background-color: var(--bg-color);
             color: var(--accent-color);
             display: flex;
@@ -65,10 +65,10 @@
         }
 
         .clear-btn {
-            background: none;
-            border: 1px solid #333;
+            background-color: #161618;
+            border: none;
             color: var(--text-color);
-            padding: clamp(4px, 0.6vh, 8px) clamp(10px, 1.2vw, 18px);
+            padding: clamp(6px, 0.6vh, 8px) clamp(12px, 1.2vw, 18px);
             border-radius: 16px;
             font-size: calc(var(--font-base) * 0.8);
             cursor: pointer;
@@ -76,7 +76,7 @@
         }
 
         .clear-btn:hover {
-            background-color: #222;
+            background-color: #252528;
         }
 
         .chat-messages {
@@ -111,7 +111,7 @@
             white-space: pre-wrap;
             word-wrap: break-word;
             overflow-wrap: anywhere;
-            border: 1px solid #1f1f23;
+            border: none;
         }
 
         .message.user .message-content {
@@ -147,6 +147,7 @@
             display: flex;
             justify-content: center;
             flex-shrink: 0;
+            border: none;
         }
 
         .input-box {
@@ -157,7 +158,7 @@
             display: flex;
             align-items: center;
             padding: clamp(6px, 0.8vh, 10px) clamp(12px, 1.5vw, 18px);
-            border: 1px solid #2b2b2f;
+            border: none;
             gap: 10px;
         }
 

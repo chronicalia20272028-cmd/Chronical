@@ -10,11 +10,9 @@
             --container-bg: #000000;
             --input-bg: #161618;
             --text-color: #e3e3e3;
-            --text-secondary: #c4c7c5;
+            --user-text-color: #8ab4f8;
             --accent-color: #8ab4f8;
-            --user-bubble: #004a77;
-            --bot-bubble: transparent;
-            --font-base: clamp(0.82rem, 1vw + 0.5rem, 1.35rem);
+            --font-base: clamp(0.85rem, 1vw + 0.5rem, 1.35rem);
             --font-header: clamp(0.95rem, 1.2vw + 0.6rem, 1.6rem);
         }
 
@@ -85,17 +83,15 @@
             padding: clamp(15px, 2vw, 30px);
             display: flex;
             flex-direction: column;
-            gap: clamp(14px, 1.8vh, 24px);
+            gap: clamp(16px, 2vh, 26px);
             scroll-behavior: smooth;
         }
 
         .message {
-            max-width: min(850px, 95%);
+            max-width: min(850px, 100%);
             margin: 0 auto;
             width: 100%;
             display: flex;
-            align-items: flex-start;
-            gap: clamp(10px, 1.2vw, 18px);
             line-height: 1.6;
             font-size: var(--font-base);
         }
@@ -105,8 +101,8 @@
         }
 
         .message-content {
-            background-color: var(--bot-bubble);
-            padding: 4px 0;
+            background: transparent;
+            padding: 0;
             border-radius: 0;
             width: 100%;
             white-space: pre-wrap;
@@ -116,29 +112,13 @@
         }
 
         .message.user .message-content {
-            background-color: var(--user-bubble);
-            padding: clamp(10px, 1.2vw, 16px) clamp(16px, 1.8vw, 22px);
+            background: transparent;
+            color: var(--user-text-color);
+            padding: 0;
             max-width: 85%;
             width: auto;
-            border-radius: 18px;
+            text-align: right;
             border: none;
-        }
-
-        .avatar {
-            width: clamp(30px, 2.5vw, 44px);
-            height: clamp(30px, 2.5vw, 44px);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: calc(var(--font-base) * 0.9);
-            flex-shrink: 0;
-        }
-
-        .bot-avatar {
-            background-color: var(--accent-color);
-            color: #000;
         }
 
         .input-container {
@@ -203,11 +183,9 @@
         }
 
         @media (max-width: 320px) {
-            .avatar { display: none !important; }
             .chat-header { padding: 8px 10px; justify-content: center; gap: 8px; }
-            .chat-messages { padding: 8px; gap: 8px; }
-            .message-content { padding: 4px 0; font-size: 0.78rem; }
-            .message.user .message-content { padding: 8px 10px; border-radius: 10px; }
+            .chat-messages { padding: 8px; gap: 10px; }
+            .message-content { font-size: 0.78rem; }
             .input-container { padding: 6px; }
             .input-box { padding: 4px 8px; border-radius: 18px; }
             .input-box textarea { font-size: 0.78rem; }
@@ -217,7 +195,6 @@
         @media (min-width: 1600px) {
             .main-container { max-width: 1200px; }
             .chat-messages { padding: 36px 48px; gap: 28px; }
-            .message.user .message-content { padding: 18px 26px; border-radius: 22px; }
             .input-box { padding: 12px 24px; border-radius: 36px; }
         }
     </style>
@@ -232,7 +209,6 @@
 
         <div class="chat-messages" id="chatMessages">
             <div class="message bot">
-                <div class="avatar bot-avatar">C</div>
                 <div class="message-content">Olá, João! Eu sou a <strong>Chronical</strong>, sua inteligência artificial desenvolvida para o seu Projeto Integrado II. Como posso ajudar hoje?</div>
             </div>
         </div>
@@ -274,16 +250,7 @@
 
             const formatted = sender === 'bot' ? formatText(text) : text;
 
-            if (sender === 'bot') {
-                messageDiv.innerHTML = `
-                    <div class="avatar bot-avatar">C</div>
-                    <div class="message-content">${formatted}</div>
-                `;
-            } else {
-                messageDiv.innerHTML = `
-                    <div class="message-content">${formatted}</div>
-                `;
-            }
+            messageDiv.innerHTML = `<div class="message-content">${formatted}</div>`;
 
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;

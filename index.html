@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,7 +8,6 @@
         :root {
             --bg-color: #131314;
             --sidebar-color: #1e1f20;
-            --chat-bg: #1e1f20;
             --input-bg: #2b2c2f;
             --text-color: #e3e3e3;
             --text-secondary: #c4c7c5;
@@ -82,12 +80,15 @@
         }
 
         .chat-header {
-            padding: 20px;
+            padding: 18px 20px;
             font-size: 1.2rem;
             font-weight: 600;
             border-bottom: 1px solid #333;
             background-color: var(--bg-color);
             color: var(--accent-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .chat-messages {
@@ -105,7 +106,7 @@
             margin: 0 auto;
             width: 100%;
             display: flex;
-            gap: 20px;
+            gap: 15px;
             line-height: 1.6;
             font-size: 1rem;
         }
@@ -119,11 +120,14 @@
             padding: 15px 20px;
             border-radius: 12px;
             width: 100%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
 
         .message.user .message-content {
             background-color: var(--user-bubble);
             max-width: 80%;
+            width: auto;
             border-radius: 18px;
         }
 
@@ -150,7 +154,7 @@
             left: 0;
             width: 100%;
             background: linear-gradient(transparent, var(--bg-color) 40%);
-            padding: 20px;
+            padding: 15px;
             display: flex;
             justify-content: center;
         }
@@ -190,37 +194,46 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            flex-shrink: 0;
             transition: opacity 0.2s;
         }
 
         .send-btn:hover {
             opacity: 0.9;
         }
+
+        /* Ajuste automático para ecrãs de telemóvel */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .message {
+                gap: 10px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Barra Lateral Estilo ChatGPT / Gemini -->
     <div class="sidebar">
         <button class="new-chat-btn" onclick="location.reload()">+ Novo Chat</button>
         <div class="sidebar-title">Histórico Recente</div>
         <div style="font-size: 0.90rem; color: var(--text-secondary); padding: 5px;">Projeto Integrado II</div>
     </div>
 
-    <!-- Tela Principal -->
     <div class="main-container">
-        <div class="chat-header">Chronical AI</div>
+        <div class="chat-header">
+            <span>Chronical AI</span>
+            <button onclick="location.reload()" style="background:none; border:1px solid #444; color:#e3e3e3; padding:5px 12px; border-radius:15px; font-size:0.8rem; cursor:pointer;">Limpar</button>
+        </div>
 
         <div class="chat-messages" id="chatMessages">
             <div class="message bot">
                 <div class="avatar bot-avatar">C</div>
-                <div class="message-content">
-                    Olá, João! Eu sou a <strong>Chronical</strong>, sua inteligência artificial desenvolvida para o seu Projeto Integrado II. Como posso ajudar na construção do seu sistema hoje?
-                </div>
+                <div class="message-content">Olá, João! Eu sou a <strong>Chronical</strong>, sua inteligência artificial desenvolvida para o seu Projeto Integrado II. Como posso ajudar hoje?</div>
             </div>
         </div>
 
-        <!-- Caixa de Digitação -->
         <div class="input-container">
             <div class="input-box">
                 <textarea id="userInput" rows="1" placeholder="Envie uma mensagem para a Chronical..."></textarea>
@@ -230,22 +243,37 @@
     </div>
 
     <script>
+        // COLE AQUI A SUA CHAVE DO GOOGLE AI STUDIO
+        const API_KEY = "AQ.Ab8RN6Jq1zOmcBeVQ7WKfNWUIGa5S--s8XVp2UuA8dN-KGNtdw";
+
         const chatMessages = document.getElementById('chatMessages');
         const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('sendBtn');
 
-        function addMessage(text, sender) {
+        // Histórico para a IA lembrar do contexto da conversa
+        let chatHistory = [];
+
+        function formatText(text) {
+            return text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>');
+        }
+
+        function addMessage(text, sender, id = null) {
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('message', sender);
+            if (id) messageDiv.id = id;
+
+            const formatted = sender === 'bot' ? formatText(text) : text;
 
             if (sender === 'bot') {
                 messageDiv.innerHTML = `
                     <div class="avatar bot-avatar">C</div>
-                    <div class="message-content">${text}</div>
+                    <div class="message-content">${formatted}</div>
                 `;
             } else {
                 messageDiv.innerHTML = `
-                    <div class="message-content">${text}</div>
+                    <div class="message-content">${formatted}</div>
                 `;
             }
 
@@ -261,10 +289,48 @@
             userInput.value = '';
             userInput.style.height = 'auto';
 
-            // Resposta interativa direta no navegador
-            setTimeout(() => {
-                addMessage("Compreendido, João! A estrutura está pronta, limpa e funcional para a sua apresentação da faculdade.", 'bot');
-            }, 1000);
+            const loadingId = 'loading-' + Date.now();
+            addMessage('A pensar...', 'bot', loadingId);
+
+            chatHistory.push({
+                role: "user",
+                parts: [{ text: text }]
+            });
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        systemInstruction: {
+                            parts: [{ text: "Você é a Chronical, uma assistente virtual inteligente, clara e prestativa, desenvolvida por João como um projeto académico de Análise e Desenvolvimento de Sistemas (Projeto Integrado II)." }]
+                        },
+                        contents: chatHistory
+                    })
+                });
+
+                const data = await response.json();
+                document.getElementById(loadingId)?.remove();
+
+                if (data.error) {
+                    addMessage(`Erro da API: ${data.error.message}`, 'bot');
+                    chatHistory.pop();
+                    return;
+                }
+
+                const botReply = data.candidates[0].content.parts[0].text;
+                addMessage(botReply, 'bot');
+
+                chatHistory.push({
+                    role: "model",
+                    parts: [{ text: botReply }]
+                });
+
+            } catch (error) {
+                document.getElementById(loadingId)?.remove();
+                addMessage('Erro de ligação. Verifique a sua internet ou a chave da API.', 'bot');
+                chatHistory.pop();
+            }
         }
 
         sendBtn.addEventListener('click', handleSend);

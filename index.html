@@ -13,7 +13,7 @@
             --text-secondary: #c4c7c5;
             --accent-color: #8ab4f8;
             --user-bubble: #004a77;
-            --bot-bubble: #161618;
+            --bot-bubble: transparent;
             --font-base: clamp(0.82rem, 1vw + 0.5rem, 1.35rem);
             --font-header: clamp(0.95rem, 1.2vw + 0.6rem, 1.6rem);
         }
@@ -94,6 +94,7 @@
             margin: 0 auto;
             width: 100%;
             display: flex;
+            align-items: flex-start;
             gap: clamp(10px, 1.2vw, 18px);
             line-height: 1.6;
             font-size: var(--font-base);
@@ -105,8 +106,8 @@
 
         .message-content {
             background-color: var(--bot-bubble);
-            padding: clamp(12px, 1.4vw, 20px) clamp(16px, 1.8vw, 24px);
-            border-radius: 14px;
+            padding: 4px 0;
+            border-radius: 0;
             width: 100%;
             white-space: pre-wrap;
             word-wrap: break-word;
@@ -116,6 +117,7 @@
 
         .message.user .message-content {
             background-color: var(--user-bubble);
+            padding: clamp(10px, 1.2vw, 16px) clamp(16px, 1.8vw, 22px);
             max-width: 85%;
             width: auto;
             border-radius: 18px;
@@ -204,7 +206,8 @@
             .avatar { display: none !important; }
             .chat-header { padding: 8px 10px; justify-content: center; gap: 8px; }
             .chat-messages { padding: 8px; gap: 8px; }
-            .message-content { padding: 8px 10px; border-radius: 10px; font-size: 0.78rem; }
+            .message-content { padding: 4px 0; font-size: 0.78rem; }
+            .message.user .message-content { padding: 8px 10px; border-radius: 10px; }
             .input-container { padding: 6px; }
             .input-box { padding: 4px 8px; border-radius: 18px; }
             .input-box textarea { font-size: 0.78rem; }
@@ -214,7 +217,7 @@
         @media (min-width: 1600px) {
             .main-container { max-width: 1200px; }
             .chat-messages { padding: 36px 48px; gap: 28px; }
-            .message-content { padding: 22px 28px; border-radius: 18px; }
+            .message.user .message-content { padding: 18px 26px; border-radius: 22px; }
             .input-box { padding: 12px 24px; border-radius: 36px; }
         }
     </style>

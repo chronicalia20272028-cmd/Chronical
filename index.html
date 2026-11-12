@@ -11,7 +11,6 @@
             --text-muted: #8e8ea0;
             --user-text-color: #8ab4f8;
             --accent-color: #8ab4f8;
-            --code-bg: #111113;
             --font-base: clamp(0.88rem, 1vw + 0.5rem, 1.3rem);
             --font-header: clamp(1rem, 1.2vw + 0.6rem, 1.55rem);
         }
@@ -34,7 +33,7 @@
             justify-content: center;
         }
 
-        button:focus-visible, textarea:focus-visible, select:focus-visible {
+        button:focus-visible, textarea:focus-visible {
             outline: 2px solid var(--accent-color);
             outline-offset: 2px;
         }
@@ -55,13 +54,6 @@
             justify-content: space-between;
             align-items: center;
             flex-shrink: 0;
-            gap: 12px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .brand-title {
@@ -73,27 +65,19 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .mode-select, .clear-btn {
-            background-color: #121214;
+        .clear-btn {
+            background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: clamp(6px, 0.6vh, 8px) clamp(10px, 1.2vw, 16px);
+            padding: 6px 12px;
             border-radius: 16px;
-            font-size: calc(var(--font-base) * 0.78);
+            font-size: calc(var(--font-base) * 0.8);
             cursor: pointer;
             transition: color 0.2s, background 0.2s;
-            appearance: none;
-            -webkit-appearance: none;
         }
 
-        .mode-select:hover, .clear-btn:hover {
-            background-color: #1e1e22;
+        .clear-btn:hover {
+            background-color: #121214;
             color: var(--text-color);
         }
 
@@ -154,109 +138,13 @@
             font-weight: 500;
         }
 
-        /* Formatação rica dentro das respostas da IA */
         .message-content p {
             margin-bottom: 0.75em;
         }
         .message-content p:last-child {
             margin-bottom: 0;
         }
-        .message-content ul, .message-content ol {
-            margin: 0.5em 0 0.75em 1.4em;
-        }
-        .message-content li {
-            margin-bottom: 0.35em;
-        }
-        .message-content h1, .message-content h2, .message-content h3 {
-            margin: 0.8em 0 0.4em;
-            color: #ffffff;
-            font-weight: 600;
-        }
-        .message-content code {
-            background-color: #18181b;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 0.9em;
-            color: #a8c7fa;
-        }
 
-        .code-wrapper {
-            background-color: var(--code-bg);
-            border-radius: 10px;
-            margin: 0.8em 0;
-            overflow: hidden;
-        }
-        .code-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 6px 14px;
-            background-color: #18181c;
-            font-size: 0.75em;
-            color: var(--text-muted);
-        }
-        .copy-code-btn {
-            background: transparent;
-            border: none;
-            color: var(--accent-color);
-            cursor: pointer;
-            font-size: 0.85em;
-        }
-        .code-wrapper pre {
-            padding: 12px 14px;
-            overflow-x: auto;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 0.88em;
-            line-height: 1.45;
-            color: #e3e3e3;
-        }
-
-        .msg-actions {
-            margin-top: 6px;
-            display: flex;
-            gap: 10px;
-            opacity: 0.55;
-            transition: opacity 0.2s;
-        }
-        .message.bot:hover .msg-actions {
-            opacity: 1;
-        }
-        .action-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            font-size: 0.75em;
-            cursor: pointer;
-            padding: 2px 4px;
-        }
-        .action-btn:hover {
-            color: var(--text-color);
-        }
-
-        /* Sugestões iniciais */
-        .suggestions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 0 clamp(16px, 2vw, 28px) 10px;
-        }
-        .suggestion-chip {
-            background-color: #121214;
-            border: none;
-            color: var(--text-muted);
-            padding: 8px 14px;
-            border-radius: 18px;
-            font-size: calc(var(--font-base) * 0.8);
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s;
-        }
-        .suggestion-chip:hover {
-            background-color: #1e1e22;
-            color: var(--text-color);
-        }
-
-        /* Área de digitação totalmente integrada na tela */
         .input-container {
             width: 100%;
             background-color: var(--bg-color);
@@ -319,21 +207,8 @@
             transform: scale(0.94);
         }
 
-        /* Indicador de pensamento pulsante */
-        .thinking {
-            color: var(--text-muted);
-            font-style: italic;
-            animation: pulse 1.4s infinite ease-in-out;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-
-        /* Smartwatch e telas ultra-pequenas */
         @media (max-width: 320px) {
             .chat-header { padding: 8px 10px; }
-            .mode-select, .suggestions { display: none !important; }
             .chat-messages { padding: 8px 10px; gap: 12px; }
             .message-content { font-size: 0.8rem; }
             .input-container { padding: 6px 10px; }
@@ -341,7 +216,6 @@
             .send-btn { width: 28px; height: 28px; }
         }
 
-        /* Smart TVs e monitores 4K */
         @media (min-width: 1600px) {
             .main-container { max-width: 1200px; }
             .chat-messages { padding: 36px 48px; gap: 30px; }
@@ -352,29 +226,14 @@
 
     <div class="main-container">
         <div class="chat-header">
-            <div class="brand">
-                <span class="brand-title">Chronical AI</span>
-            </div>
-            <div class="header-controls">
-                <select id="modeSelect" class="mode-select" aria-label="Estilo de resposta">
-                    <option value="equilibrado">Equilibrada</option>
-                    <option value="criativo">Criativa</option>
-                    <option value="direto">Direta</option>
-                </select>
-                <button class="clear-btn" onclick="resetChat()">Nova conversa</button>
-            </div>
+            <span class="brand-title">Chronical AI</span>
+            <button class="clear-btn" onclick="resetChat()">Nova conversa</button>
         </div>
 
         <div class="chat-messages" id="chatMessages">
             <div class="message bot">
                 <div class="message-content">Olá, João! Sou a <strong>Chronical</strong>. Posso ajudar você a criar códigos, escrever textos, resolver problemas ou explorar qualquer ideia hoje. Por onde começamos?</div>
             </div>
-        </div>
-
-        <div class="suggestions" id="suggestions">
-            <button class="suggestion-chip" onclick="useSuggestion('Me dê 3 ideias inovadoras de aplicativos usando IA')">Ideias de apps com IA</button>
-            <button class="suggestion-chip" onclick="useSuggestion('Explique computação quântica de forma simples')">Explicar um conceito</button>
-            <button class="suggestion-chip" onclick="useSuggestion('Escreva um script em Python para automatizar tarefas')">Gerar código</button>
         </div>
 
         <div class="input-container">
@@ -393,26 +252,15 @@
         const chatMessages = document.getElementById('chatMessages');
         const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('sendBtn');
-        const modeSelect = document.getElementById('modeSelect');
-        const suggestionsBox = document.getElementById('suggestions');
 
         let chatHistory = [];
 
-        const systemPrompts = {
-            equilibrado: "Você é a Chronical, uma inteligência artificial moderna, versátil, perspicaz e avançada, criada por João. Você atua no mesmo nível de excelência de assistentes como Gemini e ChatGPT, ajudando em programação, escrita, análise, criatividade e dúvidas do cotidiano. Estamos em novembro de 2026. Responda em português de forma clara, bem estruturada e natural.",
-            criativo: "Você é a Chronical, uma inteligência artificial altamente criativa, imaginativa e inspiradora, criada por João. Estamos em novembro de 2026. Traga ideias originais, metáforas inteligentes e soluções fora da caixa, mantendo clareza e elegância.",
-            direto: "Você é a Chronical, uma inteligência artificial objetiva, técnica e ultra-eficiente, criada por João. Estamos em novembro de 2026. Vá direto ao ponto sem rodeios, entregando respostas precisas, práticas e bem formatadas."
-        };
+        const systemPrompt = "Você é a Chronical, uma inteligência artificial moderna, versátil, perspicaz e avançada, criada por João. Você atua no mesmo nível de excelência de assistentes como Gemini e ChatGPT, ajudando em programação, escrita, análise, criatividade e dúvidas do cotidiano. Estamos em novembro de 2026. Responda em português de forma clara, bem estruturada e natural.";
 
         userInput.addEventListener('input', function() {
             this.style.height = 'auto';
             this.style.height = Math.min(this.scrollHeight, 140) + 'px';
         });
-
-        function useSuggestion(text) {
-            userInput.value = text;
-            handleSend();
-        }
 
         function resetChat() {
             chatHistory = [];
@@ -421,7 +269,6 @@
                     <div class="message-content">Conversa reiniciada. Como a <strong>Chronical</strong> pode ajudar agora, João?</div>
                 </div>
             `;
-            if (suggestionsBox) suggestionsBox.style.display = 'flex';
         }
 
         function escapeHtml(str) {
@@ -430,89 +277,16 @@
             }[tag]));
         }
 
-        function formatMarkdown(text) {
-            // Protege blocos de código ```linguagem ... ```
-            const codeBlocks = [];
-            text = text.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
-                const idx = codeBlocks.length;
-                const safeCode = escapeHtml(code.trim());
-                const languageLabel = lang || 'código';
-                codeBlocks.push(`
-                    <div class="code-wrapper">
-                        <div class="code-header">
-                            <span>${languageLabel}</span>
-                            <button class="copy-code-btn" onclick="copyCode(this)">Copiar</button>
-                        </div>
-                        <pre><code>${safeCode}</code></pre>
-                    </div>
-                `);
-                return `___CODEBLOCK_${idx}___`;
-            });
-
-            // Escapa HTML restante
-            text = escapeHtml(text);
-
-            // Código inline `...`
-            text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-            // Títulos ###, ##, #
-            text = text.replace(/^### (.*$)/gm, '<h3>$1</h3>');
-            text = text.replace(/^## (.*$)/gm, '<h2>$1</h2>');
-            text = text.replace(/^# (.*$)/gm, '<h1>$1</h1>');
-
-            // Negrito e itálico
-            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
-
-            // Listas simples
-            text = text.replace(/^\s*[-*]\s+(.*)$/gm, '<li>$1</li>');
-            text = text.replace(/(<li>.*<\/li>\n?)+/g, match => `<ul>${match}</ul>`);
-
-            // Quebras de linha em parágrafos
-            text = text.split(/\n\n+/).map(p => {
-                if (p.startsWith('<h') || p.startsWith('<ul>') || p.startsWith('___CODEBLOCK_')) return p;
-                return `<p>${p.replace(/\n/g, '<br>')}</p>`;
-            }).join('');
-
-            // Restaura blocos de código
-            codeBlocks.forEach((block, idx) => {
-                text = text.replace(`___CODEBLOCK_${idx}___`, block);
-            });
-
-            return text;
-        }
-
-        window.copyCode = function(btn) {
-            const code = btn.closest('.code-wrapper').querySelector('code').innerText;
-            navigator.clipboard.writeText(code);
-            btn.innerText = 'Copiado!';
-            setTimeout(() => btn.innerText = 'Copiar', 1800);
-        };
-
-        window.copyText = function(btn, rawText) {
-            navigator.clipboard.writeText(decodeURIComponent(rawText));
-            btn.innerText = 'Copiado';
-            setTimeout(() => btn.innerText = 'Copiar', 1800);
-        };
-
         function addMessage(text, sender, id = null, isThinking = false) {
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('message', sender);
             if (id) messageDiv.id = id;
 
+            const safeText = escapeHtml(text).replace(/\n/g, '<br>');
             if (isThinking) {
-                messageDiv.innerHTML = `<div class="message-content thinking">${text}</div>`;
-            } else if (sender === 'bot') {
-                const formatted = formatMarkdown(text);
-                const encoded = encodeURIComponent(text);
-                messageDiv.innerHTML = `
-                    <div class="message-content">${formatted}</div>
-                    <div class="msg-actions">
-                        <button class="action-btn" onclick="copyText(this, '${encoded}')">Copiar</button>
-                    </div>
-                `;
+                messageDiv.innerHTML = `<div class="message-content" style="color: var(--text-muted); font-style: italic;">${text}</div>`;
             } else {
-                messageDiv.innerHTML = `<div class="message-content">${escapeHtml(text).replace(/\n/g, '<br>')}</div>`;
+                messageDiv.innerHTML = `<div class="message-content">${safeText}</div>`;
             }
 
             chatMessages.appendChild(messageDiv);
@@ -520,40 +294,9 @@
             return messageDiv;
         }
 
-        // Efeito fluido de exibição progressiva da resposta
-        async function streamResponse(fullText) {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('message', 'bot');
-            const contentDiv = document.createElement('div');
-            contentDiv.classList.add('message-content');
-            messageDiv.appendChild(contentDiv);
-            chatMessages.appendChild(messageDiv);
-
-            const words = fullText.split(' ');
-            let current = '';
-            const step = Math.max(1, Math.floor(words.length / 45));
-
-            for (let i = 0; i < words.length; i += step) {
-                current += (i === 0 ? '' : ' ') + words.slice(i, i + step).join(' ');
-                contentDiv.innerHTML = formatMarkdown(current);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-                await new Promise(r => setTimeout(r, 18));
-            }
-
-            contentDiv.innerHTML = formatMarkdown(fullText);
-            const encoded = encodeURIComponent(fullText);
-            const actionsDiv = document.createElement('div');
-            actionsDiv.className = 'msg-actions';
-            actionsDiv.innerHTML = `<button class="action-btn" onclick="copyText(this, '${encoded}')">Copiar</button>`;
-            messageDiv.appendChild(actionsDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
         async function handleSend() {
             const text = userInput.value.trim();
             if (!text) return;
-
-            if (suggestionsBox) suggestionsBox.style.display = 'none';
 
             addMessage(text, 'user');
             userInput.value = '';
@@ -567,15 +310,13 @@
                 parts: [{ text: text }]
             });
 
-            const selectedMode = modeSelect.value;
-
             try {
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${API_KEY}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         systemInstruction: {
-                            parts: [{ text: systemPrompts[selectedMode] }]
+                            parts: [{ text: systemPrompt }]
                         },
                         contents: chatHistory
                     })
@@ -591,7 +332,7 @@
                 }
 
                 const botReply = data.candidates[0].content.parts[0].text;
-                await streamResponse(botReply);
+                addMessage(botReply, 'bot');
 
                 chatHistory.push({
                     role: "model",

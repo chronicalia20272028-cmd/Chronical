@@ -8,7 +8,6 @@
         :root {
             --bg-color: #000000;
             --container-bg: #000000;
-            --input-bg: #161618;
             --text-color: #e3e3e3;
             --user-text-color: #8ab4f8;
             --accent-color: #8ab4f8;
@@ -132,15 +131,15 @@
             border: none;
         }
 
-        /* Caixa de input agora sem borda arredondada (border-radius: 0) */
+        /* Caixa de input 100% transparente integrada direto na tela */
         .input-box {
             max-width: min(850px, 100%);
             width: 100%;
-            background-color: var(--input-bg);
+            background-color: transparent;
             border-radius: 0;
             display: flex;
             align-items: center;
-            padding: clamp(8px, 1vh, 12px) clamp(14px, 1.5vw, 20px);
+            padding: 0;
             border: none;
             gap: 10px;
         }
@@ -188,7 +187,7 @@
             .chat-messages { padding: 8px; gap: 10px; }
             .message-content { font-size: 0.78rem; }
             .input-container { padding: 6px; }
-            .input-box { padding: 6px 10px; border-radius: 0; }
+            .input-box { padding: 0; }
             .input-box textarea { font-size: 0.78rem; }
             .send-btn { width: 28px; height: 28px; }
         }
@@ -196,7 +195,6 @@
         @media (min-width: 1600px) {
             .main-container { max-width: 1200px; }
             .chat-messages { padding: 36px 48px; gap: 28px; }
-            .input-box { padding: 14px 26px; border-radius: 0; }
         }
     </style>
 </head>

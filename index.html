@@ -7,19 +7,20 @@
     <style>
         :root {
             --bg-color: #000000;
-            --text-color: #ececec;
-            --text-muted: #8e8ea0;
-            --user-text-color: #8ab4f8;
-            --accent-color: #8ab4f8;
-            --font-base: clamp(0.88rem, 1vw + 0.5rem, 1.3rem);
-            --font-header: clamp(1rem, 1.2vw + 0.6rem, 1.55rem);
+            --text-color: #f1f1f3;
+            --text-muted: #71717a;
+            --user-color: #93c5fd;
+            --accent-color: #3b82f6;
+            --font-base: clamp(0.9rem, 1vw + 0.5rem, 1.25rem);
+            --font-header: clamp(1.1rem, 1.4vw + 0.6rem, 1.6rem);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         html, body {
@@ -40,7 +41,7 @@
 
         .main-container {
             width: 100%;
-            max-width: 920px;
+            max-width: 900px;
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -49,7 +50,7 @@
         }
 
         .chat-header {
-            padding: clamp(14px, 1.8vh, 24px) clamp(16px, 2vw, 28px);
+            padding: clamp(18px, 2vh, 28px) clamp(20px, 2.5vw, 32px);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -58,9 +59,9 @@
 
         .brand-title {
             font-size: var(--font-header);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            background: linear-gradient(90deg, #8ab4f8, #c58af9);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #ffffff 30%, #a1a1aa 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -69,33 +70,34 @@
             background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: 6px 12px;
-            border-radius: 16px;
-            font-size: calc(var(--font-base) * 0.8);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: calc(var(--font-base) * 0.78);
+            font-weight: 500;
             cursor: pointer;
-            transition: color 0.2s, background 0.2s;
+            transition: all 0.2s ease;
         }
 
         .clear-btn:hover {
-            background-color: #121214;
+            background-color: rgba(255, 255, 255, 0.05);
             color: var(--text-color);
         }
 
         .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding: clamp(12px, 2vw, 28px) clamp(16px, 2vw, 28px);
+            padding: clamp(16px, 2vw, 32px) clamp(20px, 2.5vw, 32px);
             display: flex;
             flex-direction: column;
-            gap: clamp(18px, 2.2vh, 28px);
+            gap: clamp(20px, 2.5vh, 32px);
             scroll-behavior: smooth;
         }
 
         .chat-messages::-webkit-scrollbar {
-            width: 5px;
+            width: 4px;
         }
         .chat-messages::-webkit-scrollbar-thumb {
-            background: #222;
+            background: #27272a;
             border-radius: 10px;
         }
 
@@ -104,13 +106,13 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            line-height: 1.65;
+            line-height: 1.7;
             font-size: var(--font-base);
-            animation: fadeIn 0.25s ease-out;
+            animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
+            from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -131,15 +133,15 @@
         }
 
         .message.user .message-content {
-            color: var(--user-text-color);
+            color: var(--user-color);
             max-width: 85%;
             width: auto;
             text-align: right;
-            font-weight: 500;
+            font-weight: 400;
         }
 
         .message-content p {
-            margin-bottom: 0.75em;
+            margin-bottom: 0.8em;
         }
         .message-content p:last-child {
             margin-bottom: 0;
@@ -148,8 +150,8 @@
         .input-container {
             width: 100%;
             background-color: var(--bg-color);
-            padding: clamp(10px, 1.5vh, 20px) clamp(16px, 2vw, 28px);
-            padding-bottom: max(clamp(12px, 1.8vh, 22px), env(safe-area-inset-bottom));
+            padding: clamp(12px, 1.8vh, 24px) clamp(20px, 2.5vw, 32px);
+            padding-bottom: max(clamp(16px, 2vh, 26px), env(safe-area-inset-bottom));
             display: flex;
             justify-content: center;
             flex-shrink: 0;
@@ -162,7 +164,7 @@
             align-items: flex-end;
             padding: 0;
             border: none;
-            gap: 12px;
+            gap: 14px;
         }
 
         .input-box textarea {
@@ -173,52 +175,53 @@
             font-size: var(--font-base);
             resize: none;
             outline: none;
-            max-height: 140px;
-            padding: 8px 0;
-            line-height: 1.45;
+            max-height: 150px;
+            padding: 10px 0;
+            line-height: 1.5;
         }
 
         .input-box textarea::placeholder {
-            color: #5e5e66;
+            color: #52525b;
         }
 
         .send-btn {
-            background-color: var(--accent-color);
-            color: #000;
+            background-color: #f4f4f5;
+            color: #09090b;
             border: none;
-            width: clamp(34px, 2.8vw, 44px);
-            height: clamp(34px, 2.8vw, 44px);
+            width: clamp(36px, 3vw, 46px);
+            height: clamp(36px, 3vw, 46px);
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 600;
             font-size: var(--font-base);
             flex-shrink: 0;
-            transition: opacity 0.2s, transform 0.1s;
+            transition: transform 0.15s ease, background-color 0.2s ease;
         }
 
         .send-btn:hover {
-            opacity: 0.9;
+            background-color: #ffffff;
+            transform: scale(1.03);
         }
 
         .send-btn:active {
-            transform: scale(0.94);
+            transform: scale(0.96);
         }
 
         @media (max-width: 320px) {
-            .chat-header { padding: 8px 10px; }
-            .chat-messages { padding: 8px 10px; gap: 12px; }
-            .message-content { font-size: 0.8rem; }
-            .input-container { padding: 6px 10px; }
-            .input-box textarea { font-size: 0.8rem; padding: 4px 0; }
-            .send-btn { width: 28px; height: 28px; }
+            .chat-header { padding: 10px 12px; }
+            .chat-messages { padding: 12px; gap: 14px; }
+            .message-content { font-size: 0.82rem; }
+            .input-container { padding: 8px 12px; }
+            .input-box textarea { font-size: 0.82rem; padding: 6px 0; }
+            .send-btn { width: 30px; height: 30px; }
         }
 
         @media (min-width: 1600px) {
             .main-container { max-width: 1200px; }
-            .chat-messages { padding: 36px 48px; gap: 30px; }
+            .chat-messages { padding: 40px 60px; gap: 32px; }
         }
     </style>
 </head>
@@ -259,7 +262,7 @@
 
         userInput.addEventListener('input', function() {
             this.style.height = 'auto';
-            this.style.height = Math.min(this.scrollHeight, 140) + 'px';
+            this.style.height = Math.min(this.scrollHeight, 150) + 'px';
         });
 
         function resetChat() {

@@ -7,12 +7,12 @@
     <style>
         :root {
             --bg-color: #000000;
-            --text-color: #f1f1f3;
+            --text-color: #e4e4e7;
             --text-muted: #71717a;
             --user-color: #93c5fd;
             --accent-color: #3b82f6;
-            --font-base: clamp(0.9rem, 1vw + 0.5rem, 1.25rem);
-            --font-header: clamp(1.1rem, 1.4vw + 0.6rem, 1.6rem);
+            --font-base: clamp(0.82rem, 0.9vw + 0.4rem, 1.05rem);
+            --font-header: clamp(0.95rem, 1.1vw + 0.5rem, 1.25rem);
         }
 
         * {
@@ -41,7 +41,7 @@
 
         .main-container {
             width: 100%;
-            max-width: 900px;
+            max-width: 850px;
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -50,7 +50,7 @@
         }
 
         .chat-header {
-            padding: clamp(18px, 2vh, 28px) clamp(20px, 2.5vw, 32px);
+            padding: clamp(12px, 1.5vh, 20px) clamp(16px, 2vw, 24px);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -60,7 +60,7 @@
         .brand-title {
             font-size: var(--font-header);
             font-weight: 600;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.02em;
             background: linear-gradient(135deg, #ffffff 30%, #a1a1aa 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -70,9 +70,9 @@
             background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: calc(var(--font-base) * 0.78);
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: calc(var(--font-base) * 0.85);
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -86,10 +86,10 @@
         .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding: clamp(16px, 2vw, 32px) clamp(20px, 2.5vw, 32px);
+            padding: clamp(12px, 1.8vw, 24px) clamp(16px, 2vw, 24px);
             display: flex;
             flex-direction: column;
-            gap: clamp(20px, 2.5vh, 32px);
+            gap: clamp(14px, 2vh, 22px);
             scroll-behavior: smooth;
         }
 
@@ -106,13 +106,13 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            line-height: 1.7;
+            line-height: 1.6;
             font-size: var(--font-base);
             animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
+            from { opacity: 0; transform: translateY(4px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -141,17 +141,29 @@
         }
 
         .message-content p {
-            margin-bottom: 0.8em;
+            margin-bottom: 0.6em;
         }
         .message-content p:last-child {
             margin-bottom: 0;
         }
 
+        .message-content h3, .message-content h2, .message-content h1 {
+            font-size: 1.05em;
+            margin: 0.8em 0 0.3em 0;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .message-content strong {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
         .input-container {
             width: 100%;
             background-color: var(--bg-color);
-            padding: clamp(12px, 1.8vh, 24px) clamp(20px, 2.5vw, 32px);
-            padding-bottom: max(clamp(16px, 2vh, 26px), env(safe-area-inset-bottom));
+            padding: clamp(10px, 1.5vh, 18px) clamp(16px, 2vw, 24px);
+            padding-bottom: max(clamp(12px, 1.5vh, 20px), env(safe-area-inset-bottom));
             display: flex;
             justify-content: center;
             flex-shrink: 0;
@@ -164,7 +176,7 @@
             align-items: flex-end;
             padding: 0;
             border: none;
-            gap: 14px;
+            gap: 12px;
         }
 
         .input-box textarea {
@@ -175,9 +187,9 @@
             font-size: var(--font-base);
             resize: none;
             outline: none;
-            max-height: 150px;
-            padding: 10px 0;
-            line-height: 1.5;
+            max-height: 120px;
+            padding: 8px 0;
+            line-height: 1.4;
         }
 
         .input-box textarea::placeholder {
@@ -188,15 +200,15 @@
             background-color: #f4f4f5;
             color: #09090b;
             border: none;
-            width: clamp(36px, 3vw, 46px);
-            height: clamp(36px, 3vw, 46px);
+            width: clamp(32px, 2.5vw, 40px);
+            height: clamp(32px, 2.5vw, 40px);
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 600;
-            font-size: var(--font-base);
+            font-size: calc(var(--font-base) * 0.95);
             flex-shrink: 0;
             transition: transform 0.15s ease, background-color 0.2s ease;
         }
@@ -211,17 +223,17 @@
         }
 
         @media (max-width: 320px) {
-            .chat-header { padding: 10px 12px; }
-            .chat-messages { padding: 12px; gap: 14px; }
-            .message-content { font-size: 0.82rem; }
-            .input-container { padding: 8px 12px; }
-            .input-box textarea { font-size: 0.82rem; padding: 6px 0; }
-            .send-btn { width: 30px; height: 30px; }
+            .chat-header { padding: 8px 10px; }
+            .chat-messages { padding: 10px; gap: 10px; }
+            .message-content { font-size: 0.78rem; }
+            .input-container { padding: 6px 10px; }
+            .input-box textarea { font-size: 0.78rem; padding: 4px 0; }
+            .send-btn { width: 28px; height: 28px; }
         }
 
         @media (min-width: 1600px) {
-            .main-container { max-width: 1200px; }
-            .chat-messages { padding: 40px 60px; gap: 32px; }
+            .main-container { max-width: 1100px; }
+            .chat-messages { padding: 30px 48px; gap: 24px; }
         }
     </style>
 </head>
@@ -262,7 +274,7 @@
 
         userInput.addEventListener('input', function() {
             this.style.height = 'auto';
-            this.style.height = Math.min(this.scrollHeight, 150) + 'px';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
         });
 
         function resetChat() {
@@ -280,16 +292,28 @@
             }[tag]));
         }
 
+        function formatMarkdown(text) {
+            let safe = escapeHtml(text);
+            // Formata negritos **texto**
+            safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // Formata títulos ### ou ##
+            safe = safe.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+            safe = safe.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+            // Quebras de linha
+            return safe.split('\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('');
+        }
+
         function addMessage(text, sender, id = null, isThinking = false) {
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('message', sender);
             if (id) messageDiv.id = id;
 
-            const safeText = escapeHtml(text).replace(/\n/g, '<br>');
             if (isThinking) {
                 messageDiv.innerHTML = `<div class="message-content" style="color: var(--text-muted); font-style: italic;">${text}</div>`;
+            } else if (sender === 'bot') {
+                messageDiv.innerHTML = `<div class="message-content">${formatMarkdown(text)}</div>`;
             } else {
-                messageDiv.innerHTML = `<div class="message-content">${safeText}</div>`;
+                messageDiv.innerHTML = `<div class="message-content">${escapeHtml(text).replace(/\n/g, '<br>')}</div>`;
             }
 
             chatMessages.appendChild(messageDiv);
